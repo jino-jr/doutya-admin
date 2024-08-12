@@ -77,7 +77,7 @@ import { Label } from '@/components/ui/label'
 import { ScrollArea } from '@/components/ui/scroll-area'
 
 
-function pages() {
+function Page() {
 
 
     const [challenges, setChallenges] = useState([]);
@@ -668,4 +668,4 @@ function pages() {
 
 }
 
-export default pages
+export default Page

@@ -134,7 +134,7 @@ const pageTypes = [
   { label: "Compatibility", value: "compatibility" },
 ];
 
-function page() {
+function Page() {
   const [startDate, setStartDate] = useState(null); 
   const [isLoading, setIsLoading] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
@@ -177,7 +177,6 @@ function page() {
 
   const CreateNewChallenge = (data) => {
     const token = localStorage.getItem("token");
-    console.log("json fsdfsfse", token);
     return axios.post('/home/api/createchallenge', data, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -460,4 +459,4 @@ function page() {
   )
 }
 
-export default page
+export default Page

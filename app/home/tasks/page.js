@@ -151,7 +151,7 @@ const mediaCaptureFields = {
   ];
 
   
-function pages() {
+function Page() {
 
     const [startDate, setStartDate] = useState(null); 
 
@@ -659,4 +659,4 @@ function pages() {
 
 }
 
-export default pages
+export default Page
