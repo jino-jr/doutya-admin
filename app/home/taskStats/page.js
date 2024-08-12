@@ -57,18 +57,12 @@ import { DataTable } from './DataTable'
 
 
 function page() {
-  const [startDate, setStartDate] = useState(null); 
   const [isLoading, setIsLoading] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
-  const [editorData, setEditorData] = useState('');
 
   const [selectedChallenge, setSelectedChallenge] = useState({})
   const [tasks, setTasks] = useState([]);
   const [tableData, setTableData] = useState([]); 
-
-  console.log("selectedChallenge",selectedChallenge);
-  
-  console.log("selectedTasks",tasks);
 
   checkAuth(setPageLoading); /* Checking is the page authenticated  */
 
@@ -89,7 +83,8 @@ function page() {
   useEffect(()=>{
 
     const getTasks = async () => {
-        const token = localStorage.getItem("token");
+    // Check if we are in a browser environment
+    const token = typeof window !== 'undefined' ? localStorage.getItem("token") : null;
         setIsLoading(true)
         try {
           const resp = await globalApi.GetTask(selectedChallenge.challengeId, token);
@@ -125,7 +120,8 @@ function page() {
     const handleSelect = async(id) => {
         // Perform actions based  the selected value
         setIsLoading(true);
-        const token = localStorage.getItem("token");
+        // Check if we are in a browser environment
+        const token = typeof window !== 'undefined' ? localStorage.getItem("token") : null;
 
         try {
             const resp = await globalApi.GetTableData(id, token);

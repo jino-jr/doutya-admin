@@ -95,11 +95,7 @@ const createTask = async (req) => {
     const pageData = authResult.decoded_Data;
     const pageId = pageData.pageId;
     const Email = pageData.email;
-    console.log("Logged in user:", pageData);  
-
     const data = await req.json(); 
-    console.log("Data data ", pageData);  
-    
     const encryptedTaskName = encrypt(data?.taskName);
     const encryptedDescription = encrypt(data?.description);
 
@@ -114,16 +110,27 @@ const createTask = async (req) => {
         end_time: data?.endTime,
         task_type: data?.taskType,
         verification_method: data?.verificationMethod,
-        entry_points: data?.entryPoints,
-        reward_points: data?.rewardPoints,
-        reward_cash: data?.rewardCash,
-        verification_points: data?.verificationPoints,
+        entry_points: '10',
+        reward_points: '20',
+        reward_cash: '50',
+        verification_points: '5',
         player_level: data?.playerLevel,
-        is_certificate: data?.certified,
-        is_badge: data?.badge,
+        is_certificate: 'yes',
+        is_badge: "no",
         player_level: data?.playerLevel,
-        created_by: data?.createdBy
-
+        created_by: data?.createdBy,
+        created_date: new Date("2024-08-12T18:30:00Z"),
+        participants_count: '100',
+        active: "yes",
+        removed_date: null,
+        removed_by: null,
+        day: '1',
+        win_mark: '5',
+        quiz_type: "normal",
+        task_percent: '80',
+        task_variety: "technical",
+        live: "yes",
+        rank: 1,
      });
 
     // // Extracting insertId from the result

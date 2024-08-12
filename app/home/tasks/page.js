@@ -225,7 +225,8 @@ function Page() {
       });
 
       const CreateNewTask = (data) => {
-        const token = localStorage.getItem("token");
+        // Check if we are in a browser environment
+        const token = typeof window !== 'undefined' ? localStorage.getItem("token") : null;
         console.log("json fsdfsfse", token);
         return axios.post('/home/api/addtask', data, {
           headers: {

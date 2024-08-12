@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -176,8 +176,8 @@ function Page() {
   });
 
   const CreateNewChallenge = (data) => {
-    const token = localStorage.getItem("token");
-    return axios.post('/home/api/createchallenge', data, {
+// Check if we are in a browser environment
+    const token = typeof window !== 'undefined' ? localStorage.getItem("token") : null;    return axios.post('/home/api/createchallenge', data, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -188,8 +188,6 @@ function Page() {
     setIsLoading(true);
     try {
       const resp = await CreateNewChallenge(values);
-      console.log('Response:', resp);
-
       if (resp && resp.status === 201) {
         toast.success('Challenge created Challenge!');
         form.reset();

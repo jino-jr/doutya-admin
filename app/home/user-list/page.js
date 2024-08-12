@@ -73,7 +73,8 @@ function page() {
   useEffect(()=>{
 
     const getUsersData = async () => {
-        const token = localStorage.getItem("token");
+        // Check if we are in a browser environment
+        const token = typeof window !== 'undefined' ? localStorage.getItem("token") : null;
         setIsLoading(true)
         try {
           const resp = await globalApi.GetAllUsers( token);

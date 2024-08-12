@@ -1,9 +1,7 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 
-import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { z } from "zod"
 
 /* Imports For ShadCN  UI */
 import { Button } from "@/components/ui/button"
@@ -17,13 +15,6 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
 
 import {
   Select,
@@ -35,16 +26,13 @@ import {
 
 import toast, { LoaderIcon, Toaster } from 'react-hot-toast';
 
-import { CaretSortIcon, CheckIcon, FilePlusIcon, PlusCircledIcon } from "@radix-ui/react-icons"
+import { CheckIcon, FilePlusIcon, PlusCircledIcon } from "@radix-ui/react-icons"
 
 
 import Dropdown from '../../_components/Dropdown'
 import globalApi from '@/app/_services/globalApi'
 import InputNumber from '../../_components/InputNumber'
-import InputText from '../../_components/InputText'
 import LoadingOverlay from '../../_components/LoadingOverlay'
-import TimeInput from '../../_components/TimeInput'
-import RadioInput from '../../_components/RadioInput'
 import { checkAuth } from '@/hooks/checkAuth'
 
 import {
@@ -61,7 +49,6 @@ import { CKEditor } from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import axios from 'axios'
 import { Trash2 } from 'lucide-react'
-import { Badge } from '@/components/ui/badge'
 
 import {
   Tooltip,
@@ -72,9 +59,8 @@ import {
 
 import { v4 as uuidv4 } from 'uuid';
 import clsx from 'clsx'
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { Label } from '@/components/ui/label'
-import { ScrollArea } from '@/components/ui/scroll-area'
+
+const { htmlToText } = require('html-to-text');
 
 
 function Page() {
@@ -103,7 +89,8 @@ function Page() {
     
     const handleAddQuestion = (editorData, questionId = null) => {
 
-      const strippedData = stripHtmlTags(editorData).trim();
+      // const strippedData = stripHtmlTags(editorData).trim();
+      const strippedData = htmlToText(editorData).trim();
       if (!strippedData) {
         setQuestionError(true);
         toast.error('Please enter a question.');
@@ -282,7 +269,8 @@ function Page() {
 
 
       const CreateNewQuiz = (data) => {
-        const token = localStorage.getItem("token");
+        // Check if we are in a browser environment
+      const token = typeof window !== 'undefined' ? localStorage.getItem("token") : null;
         console.log("json fsdfsfse", token);
         return axios.post('/home/api/createQuiz', data, {
           headers: {
@@ -337,12 +325,11 @@ function Page() {
       }
 
 
-      const stripHtmlTags = (html) => {
-        const div = document.createElement('div');
-        div.innerHTML = html;
-        return div.textContent || div.innerText || '';
-      };
-
+      // const stripHtmlTags = (html) => {
+      //   const div = document.createElement('div');
+      //   div.innerHTML = html;
+      //   return div.textContent || div.innerText || '';
+      // };
 
 
       if (pageLoading) {
@@ -435,7 +422,8 @@ function Page() {
                               <Input
                                 className="col-span-5"
                                 placeholder="Enter a Question"
-                                value={stripHtmlTags(question.question)}
+                                // value={stripHtmlTags(question.question)}
+                                value={htmlToText(question.question)}
                                 onClick={() => {
                                   setEditorData(question.question);
                                   // Logic to open the dialog

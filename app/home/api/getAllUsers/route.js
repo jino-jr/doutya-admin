@@ -6,7 +6,6 @@ import { NextResponse } from "next/server";
 
 
 export async function GET(req) {
-    console.log("Inthe request get challenges");
     
     const authResult = await authenticate(req);
     if (!authResult.authenticated) {
