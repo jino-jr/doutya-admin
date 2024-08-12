@@ -7,7 +7,6 @@ import mysql from "mysql2/promise";
 //   database: "doutya",
 //   password: "jinoJINO"
 // });
-// https://247.163.178.68.host.secureserver.net:2083/
 
 const connection = await mysql.createConnection({
   host: process.env.DATABASE_HOST,

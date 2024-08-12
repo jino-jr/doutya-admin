@@ -26,7 +26,7 @@
 
 const crypto = require('crypto');
 
-const ENCRYPTION_KEY = '8b0a1c0a1e21d12d5b0e8e4d5e3b1c1f0d4f8b5b1a0d2d3f4d1b2c3e0a1e1c0b';
+const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY;
 const IV_LENGTH = 16;
 
 // Ensure the ENCRYPTION_KEY is of the correct length
