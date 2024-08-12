@@ -5,7 +5,6 @@ import { checkAuth } from '@/hooks/checkAuth';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import LoadingOverlay from '../_components/LoadingOverlay';
-import useBeforeUnload from '@/hooks/useBeforeUnload';
 
 
 function page() {
